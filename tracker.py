@@ -1,49 +1,68 @@
-# Expense Tracker - Installment 3
-# Author: Prim
-# Installment 3: The Tracker Does Math - Adding tax, budget check, and updating subtotal.
-
-print("=" * 40)
-print("           EXPENSE TRACKER          ")
-print("     Know where your money goes.    ")
-print("=" * 40)
+print("========================================")
+print("EXPENSE TRACKER")
+print("Know where your money goes.")
+print("========================================")
 print("MAIN MENU")
-print("  [1] Add an expense        (coming soon)")
-print("  [2] View all expenses     (coming soon)")
-print("  [3] Show total spent      (coming soon)")
-print("  [4] Exit                  (coming soon)")
+print("[1] Add an expense (coming soon)")
+print("[2] View all expenses (coming soon)")
+print("[3] Show total spent (coming soon)")
+print("[4] Exit (coming soon)")
 
-name = input("What's your name? ")
-print(f"Welcome, {name}! Let's log two expenses.")
+user_name = input("What's your name? ")
+print(f"Welcome, {user_name}! Let's log two expenses.")
 
-subtotal = 0.0
+expense1_name = input("First expense? ")
+expense1_amount = float(input("Amount? "))
 
-item1 = input("First expense? ")
-amount1 = float(input("Amount? "))
-subtotal = subtotal + amount1
+if expense1_amount > 200:
+    print("  Huge expense - are you sure?")
+elif expense1_amount > 100:
+    print("  Big expense.")
+elif expense1_amount > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
 
-item2 = input("Second expense? ")
-amount2 = float(input("Amount? "))
-subtotal = subtotal + amount2
+expense2_name = input("Second expense? ")
+expense2_amount = float(input("Amount? "))
 
+if expense2_amount > 200:
+    print("  Huge expense - are you sure?")
+elif expense2_amount > 100:
+    print("  Big expense.")
+elif expense2_amount > 50:
+    print("  Moderate expense.")
+else:
+    print("  Small expense.")
+
+if expense1_amount > 100 and expense2_amount > 100:
+    print("  Two big expenses in a row - slow down!")
+
+tax_rate = float(input("Tax rate %? "))
+budget = float(input("Your budget? "))
+
+subtotal = expense1_amount + expense2_amount
 average = subtotal / 2
-
-tax_percent = float(input("Tax rate (%): "))
-tax = subtotal * (tax_percent / 100)
-total = subtotal + tax
-
-budget = float(input("Budget? "))
-over_budget = total > budget
-left = budget - total
+tax_amount = subtotal * (tax_rate / 100)
+grand_total = subtotal + tax_amount
+over_budget = grand_total > budget
+left_in_budget = budget - grand_total
 
 print("-" * 40)
 print("SUMMARY")
-print(f" - {item1}:\t${amount1}")
-print(f" - {item2}:\t${amount2}")
-print(f"Subtotal:\t${subtotal}")
-print(f"Average:\t${average}")
-print(f"Tax ({tax_percent}%):\t${tax}")
-print(f"Grand total:\t${total}")
-print(f"Over budget?\t{over_budget}")
-print(f"Left in budget:\t${left}")
+print(f"- {expense1_name}: ${expense1_amount}")
+print(f"- {expense2_name}: ${expense2_amount}")
+print(f"Subtotal: ${subtotal}")
+print(f"Average: ${average}")
+print(f"Tax ({tax_rate}%): ${tax_amount}")
+print(f"Grand total: ${grand_total}")
+
+if over_budget:
+    print(f"Over budget by ${abs(left_in_budget)}!")
+elif grand_total > (budget * 0.90):
+    print(f"Careful: only ${left_in_budget} left.")
+else:
+    print(f"Within budget. ${left_in_budget} left.")
+
 print("-" * 40)
-print(f"Made by: {name} | Installment 3")
+print(f"Made by: {user_name} | Installment 4")
